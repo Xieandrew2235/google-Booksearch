@@ -1,24 +1,30 @@
-import React from "react";
-import Saved from "./pages/Saved";
-import DeleteBtn from "./components/DeleteBtn";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Navbar from "./components/Nav";
+import Title from "./components/Title";
+import SavedBooks from "./pages/SavedBooks";
+import Search from "./pages/Search";
+import NoMatch from "./pages/NoMatch";
+import './app.css';
 
-function App() {
+class App extends Component {
+  render() {
     return (
-        <div>
-            {/* <Books /> */}
-            {/* <Switch>
-
-                <Router>
-
-                    <Route exact path="/" component={Saved} />
-
-                </Router>
-                )
-      </Switch> */}
-        <DeleteBtn></DeleteBtn>
+      <Router>
+        <div className="container.fluid">
+          <Navbar />
+          <Title />
+          <Switch>
+            <Route exact path="/" component={SavedBooks} />
+            <Route exact path="/books" component={SavedBooks} />
+            <Route exact path="/search" component={Search} />
+            <Route component={NoMatch} />
+          </Switch>
         </div>
+      </Router>
+
     );
+  }
 }
 
 export default App;

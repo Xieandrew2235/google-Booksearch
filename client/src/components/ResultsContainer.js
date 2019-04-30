@@ -1,53 +1,31 @@
 import React from "react";
-import BookResults from "BookResults";
 
- function ResultsContainer () {
-   if(props.path === "/") {
-      return(
-          <div id="resultsContainer">
-              <h3>Results Found</h3>
-              {props.bookData.map((book) => {
-                  const bookInfo = book.volumeInfo;
-                  return <BookResult
-                  title={bookInfo.title}
-                  authors={bookInfo.authors}
-                  description={bookInfo.description}
-                  link={bookInfo.canonicalVolumeLink}
-                  img={bookInfo.imageLinks}
-                  path={props.path}
-                  key={book.id}/>
-              })}
-          </div>
-      );
+function ResultsContainer(props) {
+    return (
 
-   } else if(props.path === "/saved") {
-      if(props.savedBooks.length > 0) {
-          return(
-              <div id="resultsContainer">
-                  <h3>Saved Books</h3>
-                  {props.savedBooks.map((book) => {
-                      return <BookResult
-                      title={book.title}
-                      authors={book.authors}
-                      description={book.description}
-                      link={book.link}
-                      img={book.img}
-                      id={book._id}
-                      path={props.path}
-                      key={book._id}/>
-                  })}
-              </div>
-          );
-      } else {
-          return(
-               <div id="resultsContainer">
-                  <h3>Saved Books</h3>
-                  <p>No saved books.</p>
-              </div>
-          );
-      }
-  }
+        <div className="card" key={props.id}>
+            <div className="card-body">
+                <div className="row">
+                    <div className="col-md-9">
+                        <h1 className="card-title">{props.title}</h1>
+                        <h3 className="card-subtitle mb-2 text-muted">by {props.author}</h3>
+                    </div>
+                    <div className="col-md-3">
+                        <img src={props.img} alt={props.title} />
+                    </div>
+                </div>
+                <hr />
+                <div className="row">
+
+                    <p className="card-text">{props.synopsis}</p>
+                </div>
+                <a href={props.link} className="card-text">Preview</a>
+                <br />
+                <button className="card-link" onClick={() => props.saveBook(props)}>Save</button>
+            </div>
+        </div>
+
+    )
 }
-
 
 export default ResultsContainer;
